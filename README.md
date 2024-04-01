@@ -1,4 +1,4 @@
-# social-media-backend
+# Inventory Management Backend  
 ## Use PHP Version
 ```
 8.1 or avobe
