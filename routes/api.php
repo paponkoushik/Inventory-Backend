@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Inventory\InventoryController;
+use App\Http\Controllers\Item\ItemController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
 
@@ -33,16 +34,24 @@ Route::group(['prefix' => 'auth/'], function (Router $router) {
         ->name('myself');
 });
 
-Route::middleware('jwt.auth')->group(function (Router $router) {
+Route::middleware('jwt.auth')->group(callback: function (Router $router) {
     $router->post('auth/logout', [AuthController::class, 'logout'])
         ->name('logout');
 
-    Route::group(['prefix' => 'inventory/'], function (Router $router) {
+    Route::group(['inventory/'], function (Router $router) {
         $router->get('index', [InventoryController::class, 'index'])->name('inventory.index');
         $router->post('store', [InventoryController::class, 'store'])->name('inventory.store');
         $router->get('show/{inventory}', [InventoryController::class, 'show'])->name('inventory.show');
-        $router->patch('update/{inventory}', [InventoryController::class, 'update'])->name('inventory.update');
+        $router->put('update/{inventory}', [InventoryController::class, 'update'])->name('inventory.update');
         $router->delete('delete/{inventory}', [InventoryController::class, 'delete'])->name('inventory.delete');
+    });
+
+    Route::group(['prefix' => 'item/'], function (Router $router) {
+        $router->get('index', [ItemController::class, 'index'])->name('item.index');
+        $router->post('store', [ItemController::class, 'store'])->name('item.store');
+        $router->get('show/{item}', [ItemController::class, 'show'])->name('item.show');
+        $router->put('update/{item}', [ItemController::class, 'update'])->name('item.update');
+        $router->delete('delete/{item}', [ItemController::class, 'delete'])->name('item.delete');
     });
 
 });

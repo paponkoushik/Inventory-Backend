@@ -10,11 +10,15 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'image', 'quantity', 'inventory_id'];
+    protected $fillable = ['name', 'description', 'image', 'quantity', 'inventory_id', 'created_at', 'updated_at'];
     protected $casts = [
         'name' => 'string',
         'description' => 'string',
-        'quantity' => 'numerous'
+        'image' => 'string',
+        'quantity' => 'integer',
+        'inventory_id' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function inventory(): BelongsTo
