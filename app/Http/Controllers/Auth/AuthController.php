@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SignupRequest;
 use App\Http\Resources\UserInfo\UserInfoResource;
 use App\Models\User;
 use App\Services\Auth\AuthService;
@@ -19,7 +20,17 @@ class AuthController extends Controller
     }
     public function login(Request $request): JsonResponse
     {
-        return $this->service->login($request->only('email_or_username', 'password'));
+        return $this
+            ->service
+            ->login($request->only('email', 'password'));
+    }
+    public function signup(SignupRequest $request): JsonResponse
+    {
+//        dd($request->all());
+        return $this
+            ->service
+            ->setAttrs($request->only('name', 'email', 'password'))
+            ->signup();
     }
     public function refresh(): JsonResponse
     {

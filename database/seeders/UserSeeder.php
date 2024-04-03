@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     public function run() {
         User::query()->insert([
             [
-                'username' => 'Koushik',
+                'name' => 'Koushik',
                 'email' => 'koushik@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456'),
@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'username' => 'Papon',
+                'name' => 'Papon',
                 'email' => 'Papon@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456'),

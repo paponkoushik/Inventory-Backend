@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Inventory extends Model
 {
-    use HasFactory;
-    protected $fillable = ['name', 'description', 'user_id'];
+    protected $fillable = ['name', 'description', 'user_id', 'created_at', 'deleted_at'];
     protected $casts = [
         'name' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+        'created_at' => 'datetime',
+        'deleted_at' => 'datetime'
     ];
 
     public function user(): BelongsTo
