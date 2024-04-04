@@ -40,6 +40,7 @@ Route::middleware('jwt.auth')->group(callback: function (Router $router) {
 
     Route::group(['prefix' => 'inventory/'], function (Router $router) {
         $router->get('index', [InventoryController::class, 'index'])->name('inventory.index');
+        $router->get('all-inventories', [InventoryController::class, 'allInventories'])->name('item.allInventories');
         $router->post('store', [InventoryController::class, 'store'])->name('inventory.store');
         $router->get('show/{inventory}', [InventoryController::class, 'show'])->name('inventory.show');
         $router->put('update/{inventory}', [InventoryController::class, 'update'])->name('inventory.update');

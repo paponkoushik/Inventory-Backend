@@ -24,6 +24,14 @@ class InventoryController extends Controller
 
         return response()->json($inventory, 200);
     }
+    public function allInventories(): JsonResponse
+    {
+        $inventory = cache()->rememberForever('inventories', function () {
+            return Inventory::query()->where('user_id', auth()->user()->id)->get();
+        });
+
+        return response()->json($inventory, 200);
+    }
 
     public function store(InventoryRequest $request): JsonResponse
     {

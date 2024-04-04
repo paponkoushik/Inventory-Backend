@@ -20,7 +20,10 @@ class ItemController extends Controller
 
     public function index(): JsonResponse
     {
-        $item = Item::query()->with('inventory')->paginate(10);
+        $item = Item::query()
+            ->with('inventory')
+            ->where('user_id', auth()->user()->id)
+            ->paginate(10);
 
         return response()->json($item, 200);
     }
@@ -30,11 +33,12 @@ class ItemController extends Controller
         $item = DB::transaction(function () use ($request) {
             return $this->service
                 ->setAttrs($request->only('name', 'description', 'quantity', 'inventory_id', 'image'))
+                ->setAttr('user_id', auth()->user()->id)
                 ->store()
                 ->getData();
         });
 
-        return response()->json(['data' => $item, 'message' => 'Product has been created successfully'], 200);
+        return response()->json(['data' => $item, 'message' => 'Item has been created successfully'], 200);
     }
 
     public function show(item $item): JsonResponse
@@ -52,7 +56,7 @@ class ItemController extends Controller
                 ->getData();
         });
 
-        return response()->json(['data' => $item, 'message' => 'Product has been updated successfully'], 200);
+        return response()->json(['data' => $item, 'message' => 'Item has been updated successfully'], 200);
     }
 
     public function delete(Item $item): JsonResponse
