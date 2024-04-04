@@ -38,7 +38,7 @@ Route::middleware('jwt.auth')->group(callback: function (Router $router) {
     $router->post('auth/logout', [AuthController::class, 'logout'])
         ->name('logout');
 
-    Route::group(['inventory/'], function (Router $router) {
+    Route::group(['prefix' => 'inventory/'], function (Router $router) {
         $router->get('index', [InventoryController::class, 'index'])->name('inventory.index');
         $router->post('store', [InventoryController::class, 'store'])->name('inventory.store');
         $router->get('show/{inventory}', [InventoryController::class, 'show'])->name('inventory.show');

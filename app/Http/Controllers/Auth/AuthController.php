@@ -26,7 +26,6 @@ class AuthController extends Controller
     }
     public function signup(SignupRequest $request): JsonResponse
     {
-//        dd($request->all());
         return $this
             ->service
             ->setAttrs($request->only('name', 'email', 'password'))
