@@ -44,5 +44,9 @@ php artisan jwt:secret
 ```
 php artisan serve
 ```
+### 8. Don't forget to make symlink
+```
+php artisan storage:link
+```
 
 
